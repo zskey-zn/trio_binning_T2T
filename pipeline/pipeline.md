@@ -26,6 +26,7 @@ https://github.com/marbl/verkko/issues/203
 # generate compress kmer database
 meryl count k=30 threads=24 compress output Mother.meryl maternal_*.clean.fq.gz
 meryl count k=30 threads=24 compress output father.meryl paternal_*.clean.fq.gz
+meryl count k=30 threads=24 compress output child.meryl Sus_scrofa_dedup.*.fq.gz
 HiFi=all_hifi.bam.fasta
 ONT=all.sup.pass.fq.gz
 # run verkko2
@@ -104,4 +105,15 @@ Using reads/contigs from the corresponding parental lines to fill gaps and exten
 yak trioeval -t16 pat.yak mat.yak hap1.fa
 yak trioeval -t16 pat.yak mat.yak hap2.fa
 ```
-##
+## hap blob plot
+```bash
+# generate hapmer.meryl
+$YOUR_PATH/merqury-1.4/trio/hapmers.sh  Mother.meryl father.meryl child.meryl
+# plot
+$YOUR_PATH/merqury-1.4/trio/hap_blob.sh Mother.hapmer.meryl father.hapmer.meryl \
+  hap1_assembly_final.fasta \
+  hap2_assembly_final.fasta \
+	out
+
+```
+<img  alt="image" src="./out.hapmers.blob.png" />
