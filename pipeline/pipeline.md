@@ -42,5 +42,21 @@ Use `yak triobin` to genotype HiFi/ONT reads.
 <img width="563" height="191" alt="image" src="https://github.com/user-attachments/assets/f3a417f0-2e68-4f2f-9165-75c16bacc249" />
 Parameter reference：https://github.com/lh3/yak/issues/1
 ```bash
+# HiFi
+yak triobin -t 16  pat.yak mat.yak hifi.fasta > hifi_triobin.txt
+awk '$3>=21&&$4<=2&&$2=="p"{print $1}' hifi_triobin.txt > hifi_paternal.txt
+awk '$4>=21&&$3<=2&&$2=="m"{print $1}' hifi_triobin.txt > hifi_maternal.txt
+seqkit grep -f hifi_paternal.txt hifi.fasta >hifi_pat.fa
+seqkit grep -f hifi_maternal.txt hifi.fasta >hifi_mat.fa
 
+# ONT
+seqkit fq2fa ONT.fq.gz > ONT.fasta
+yak triobin -t 16  pat.yak mat.yak ont.fasta  > ont_triobin.txt
+awk '$3>=21&&$4<=2&&$2=="p"{print $1}' ont_triobin.txt > ont_paternal.txt
+awk '$4>=21&&$3<=2&&$2=="m"{print $1}' ont_triobin.txt > ont_maternal.txt
+seqkit grep -f ont_paternal.txt ONT.fq.gz >ont_pat.fq
+seqkit grep -f ont_maternal.txt ONT.fq.gz >ont_mat.fq
 ```
+
+## 02.genotype_reads_assembly
+Use genotype HiFi/ONT reads to assemble separately.
