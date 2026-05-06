@@ -94,3 +94,10 @@ awk '/^S/{print ">"$2;print $3}' ${prefix}.hic.hap1.p_ctg.gfa > ${prefix}.hic.ha
 awk '/^S/{print ">"$2;print $3}' ${prefix}.hic.hap2.p_ctg.gfa > ${prefix}.hic.hap2.p_ctg.fa 
 
 ```
+
+# 04.Gapfill and telomere expand
+Using reads/contigs from the corresponding parental lines to fill gaps and extend telomeres. 
+
+# 05.evaluation
+## swith_err
+
