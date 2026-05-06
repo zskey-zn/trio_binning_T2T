@@ -19,8 +19,9 @@ awk '/^S/{print ">"$2;print $3}' ${prefix}.dip.hap1.p_ctg.gfa > ${prefix}.dip.ha
 awk '/^S/{print ">"$2;print $3}' ${prefix}.dip.hap2.p_ctg.gfa > ${prefix}.dip.hap2.p_ctg.fa
 ```
 
-## verkko
-
+## verkko2
+When verkko has phasing information (like Hi-C or trio), it can generate scaffolds when the resolution is ambiguous but long range structure is clear, so it's contig maybe have gap.
+https://github.com/marbl/verkko/issues/203
 ```bash
 # generate compress kmer database
 meryl count k=30 threads=24 compress output Mother.meryl maternal_*.clean.fq.gz
@@ -62,5 +63,34 @@ seqkit grep -f ont_maternal.txt ONT.fq.gz >ont_mat.fq
 
 # 02.genotype_reads_assembly
 Use genotype HiFi/ONT reads to assemble separately.
+## ONT and HiFi mixture assemble
+```bash
+hifiasm --telo-m CCCTAA -o ul_pat -t 26 --ul ont_pat.fq hifi_pat.fq  2> out.log
+hifiasm --telo-m CCCTAA -o ul_mat -t 26 --ul ont_pat.fq hifi_mat.fq  2> out.log
+awk '/^S/{print ">"$2;print $3}' ul_pat.bp.p_ctg.gfa > ul_pat.bp.p_ctg.fa
+awk '/^S/{print ">"$2;print $3}' ul_mat.bp.p_ctg.gfa > ul_mat.bp.p_ctg.fa
+```
+## ONT reads assemble separately
+```bash
+hifiasm --telo-m CCCTAA -o ont_pat -t 26 --ul ont_pat.fq --ont ont_pat.fq  2> out.log
+hifiasm --telo-m CCCTAA -o ont_mat -t 26 --ul ont_pat.fq --ont ont_mat.fq  2> out.log
+awk '/^S/{print ">"$2;print $3}' ont_pat.bp.p_ctg.gfa > ont_pat.bp.p_ctg.fa
+awk '/^S/{print ">"$2;print $3}' ont_mat.bp.p_ctg.gfa > ont_mat.bp.p_ctg.fa
+```
 
+# 03.scaffloding
+Use hifiasm(trio mode) contig to scaffloding.When hifiasm(trio mode) contig N50 and busco is unsatisfactory, we can ues hifiasm(Hi-C mode) contigs to scafflod.(Before scaffloding,use mummer/dotploty genotype contigs with trio contigs)
 
+```bash
+HiFi=all_hifi.bam.fasta
+ONT=all.sup.pass.fq.gz
+hic1=T251021_0053_3_RUN1119_1.fq.gz
+hic2=T251021_0053_3_RUN1119_2.fq.gz
+prefix=Sus_scrofa
+
+# telo-m parameter must fix
+hifiasm -o ${prefix} -t 50 --telo-m CCCTAA --ul ${ONT} --h1 ${hic1} --h2 ${hic2} ${HiFi} 2> out.log
+awk '/^S/{print ">"$2;print $3}' ${prefix}.hic.hap1.p_ctg.gfa > ${prefix}.hic.hap1.p_ctg.fa && \
+awk '/^S/{print ">"$2;print $3}' ${prefix}.hic.hap2.p_ctg.gfa > ${prefix}.hic.hap2.p_ctg.fa 
+
+```
