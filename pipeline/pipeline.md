@@ -47,6 +47,7 @@ Use `yak triobin` to genotype HiFi/ONT reads.
 Parameter reference：https://github.com/lh3/yak/issues/1
 ```bash
 # HiFi
+## hifi.fasta.gz also can accpect
 yak triobin -t 16  pat.yak mat.yak hifi.fasta > hifi_triobin.txt
 awk '$3>=21&&$4<=2&&$2=="p"{print $1}' hifi_triobin.txt > hifi_paternal.txt
 awk '$4>=21&&$3<=2&&$2=="m"{print $1}' hifi_triobin.txt > hifi_maternal.txt
@@ -54,6 +55,7 @@ seqkit grep -f hifi_paternal.txt hifi.fasta >hifi_pat.fa
 seqkit grep -f hifi_maternal.txt hifi.fasta >hifi_mat.fa
 
 # ONT
+## fastq file also can accpect
 seqkit fq2fa ONT.fq.gz > ONT.fasta
 yak triobin -t 16  pat.yak mat.yak ont.fasta  > ont_triobin.txt
 awk '$3>=21&&$4<=2&&$2=="p"{print $1}' ont_triobin.txt > ont_paternal.txt
