@@ -1,0 +1,14 @@
+hifireads=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/02.Fiber_seq/all_hifi.bam.fasta
+ontreads=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/03.ONT/all.sup.pass.fq.gz
+#二代数据
+R1=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/01.BGI/02.cleandata/Sus_scrofa_dedup.1.fq.gz
+R2=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/01.BGI/02.cleandata/Sus_scrofa_dedup.2.fq.gz
+#父母本重测序数据
+mat_1=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/04.reseq_parent/02.cleandata/maternal_1.clean.fq.gz
+mat_2=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/04.reseq_parent/02.cleandata/maternal_2.clean.fq.gz
+pat_1=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/04.reseq_parent/02.cleandata/paternal_1.clean.fq.gz
+pat_2=/public/frasergen/backup/dna/project/project_2025Q4/20251223_251541_Sus_scrofa/whfs-xs-251541_Sus_scrofa_rawdata/04.reseq_parent/02.cleandata/paternal_2.clean.fq.gz
+#hic1 hic2 Hi-C 的data
+hic1=/work/frasergen/backup/lab/2026/whfs-xs-251541/whfs-xs-251541_Hi-C_BGI/1.rawdata/X4_3-T251021_0053_3/T251021_0053_3_RUN1119_1.fq.gz
+hic2=/work/frasergen/backup/lab/2026/whfs-xs-251541/whfs-xs-251541_Hi-C_BGI/1.rawdata/X4_3-T251021_0053_3/T251021_0053_3_RUN1119_2.fq.gz
+telomere_motif=CCCTAA
