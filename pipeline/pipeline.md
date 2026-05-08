@@ -1,3 +1,7 @@
+# code
+Run `python trio_pipeline.py conf.txt` to generate the execution script and shell.list.
+
+If you have access to a cluster (SGE or Slurm), submit the jobs using qsub or sbatch according to shell.list. Otherwise, run the steps sequentially using shell.list as a guide.
 # 00.trio_binning_assembly
 Use hifiasm/verkko2 generate Trio binning contigs.
 ## hifiasm
