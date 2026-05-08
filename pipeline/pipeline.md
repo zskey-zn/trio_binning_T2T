@@ -27,6 +27,9 @@ https://github.com/marbl/verkko/issues/203
 meryl count k=30 threads=24 compress output Mother.meryl maternal_*.clean.fq.gz
 meryl count k=30 threads=24 compress output father.meryl paternal_*.clean.fq.gz
 meryl count k=30 threads=24 compress output child.meryl Sus_scrofa_dedup.*.fq.gz
+# generate hapmer.meryl
+$YOUR_PATH/merqury-1.4/trio/hapmers.sh  Mother.meryl father.meryl child.meryl
+
 HiFi=all_hifi.bam.fasta
 ONT=all.sup.pass.fq.gz
 # run verkko2
@@ -109,8 +112,6 @@ yak trioeval -t16 pat.yak mat.yak hap2.fa
 ```
 ## hap blob plot
 ```bash
-# generate hapmer.meryl
-$YOUR_PATH/merqury-1.4/trio/hapmers.sh  Mother.meryl father.meryl child.meryl
 # plot
 $YOUR_PATH/merqury-1.4/trio/hap_blob.sh Mother.hapmer.meryl father.hapmer.meryl \
   hap1_assembly_final.fasta \
